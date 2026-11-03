@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Lista de Tareas{% endblock %}
+
+{% block body %}
+    <h1>Tareas</h1>
+
+    <ul>
+        {% for tarea in tareas %}
+            <li>{{ tarea.titulo }}</li>
+        {% else %}
+            <li>No hay tareas disponibles.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

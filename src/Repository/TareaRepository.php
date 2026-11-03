@@ -16,6 +16,22 @@ class TareaRepository extends ServiceEntityRepository
         parent::__construct($registry, Tarea::class);
     }
 
+    /**
+     * @return Tarea[]
+     */
+    public function findRecientes(): array
+    {
+        return $this->findBy([], ['id' => 'DESC']);
+    }
+
+    /**
+     * @return Tarea[]
+     */
+    public function findPendientes(): array
+    {
+        return $this->findBy(['completada' => false], ['id' => 'DESC']);
+    }
+
 //    /**
 //     * @return Tarea[] Returns an array of Tarea objects
 //     */
