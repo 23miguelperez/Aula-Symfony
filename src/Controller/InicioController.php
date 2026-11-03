@@ -17,14 +17,19 @@ class InicioController extends AbstractController
     #[Route('/', name: 'app_inicio')]
     public function index(): Response
     {
-        return new Response('Hola Symfony');
+        return $this->render('inicio/index.html.twig', [
+            'titulo' => 'Hola Symfony',
+        ]);
     }
 
     #[Route('/saludo/{nombre}', name: 'app_saludo')]
     public function saludo(string $nombre): Response
     {
+        // Sanitiza el nombre para evitar inyecciones de código
         $nombreSeguro = htmlspecialchars($nombre, ENT_QUOTES);
-        return new Response("Hola, $nombreSeguro!");
+        return $this->render('inicio/saludo.html.twig', [
+            'nombre' => $nombreSeguro
+        ]);
     }
 }
 
