@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ver Tarea{% endblock %}
+
+{% block body %}
+    <h1>{{ tarea.titulo }}</h1>
+
+    {% if tarea.completada %}
+        <p>{{ tarea.completada }}</p>
+    {% else %}
+        <p>No hay descripción disponible.</p>
+    {% endif %}
+
+    <a href="{{ path('app_tarea_index') }}">Volver a la lista de tareas</a>
+
+
+{% endblock %}

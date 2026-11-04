@@ -40,7 +40,31 @@ class TareaController extends AbstractController
         return $this->render('tarea/nueva.html.twig', [
             'form' => $form,    
         ]);
+    }
 
-        
+    #[Route('/tareas/{id}', name: 'app_tarea_ver', methods: ['GET'], requirements: ['id' => '\d+'])]
+    public function ver(Tarea $tarea): Response
+    {
+        return $this->render('tarea/ver.html.twig', [
+            'tarea' => $tarea,
+        ]);
+    }
+
+    #[Route('/tareas/{id}/editar', name: 'app_tarea_editar', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    public function editar(Request $request, Tarea $tarea, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(TareaType::class, $tarea);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_tarea_ver', ['id' => $tarea->getId()]);
+        }
+
+        return $this->render('tarea/editar.html.twig', [
+            'tarea' => $tarea,
+            'form' => $form,
+        ]);
     }
 }

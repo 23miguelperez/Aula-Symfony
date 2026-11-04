@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ tarea.titulo }}{% endblock %}
+
+{% block body %}
+    <h1>{{ tarea.titulo }}</h1>
+
+    {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+        {{ form_row(form.titulo) }}
+        {{ form_row(form.descripcion) }}
+        {{ form_row(form.completada) }}
+        <button type="submit">Guardar</button>
+    {{ form_end(form) }}
+
+{% endblock %}

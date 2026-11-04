@@ -9,7 +9,7 @@
 
     <ul>
         {% for tarea in tareas %}
-            <li>{{ tarea.titulo }}</li>
+            <li><a href="{{ path('app_tarea_editar', {'id': tarea.id}) }}">{{ tarea.titulo }}</a></li>
         {% else %}
             <li>No hay tareas disponibles.</li>
         {% endfor %}
