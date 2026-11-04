@@ -5,6 +5,8 @@
 {% block body %}
     <h1>Tareas</h1>
 
+    <a href="{{ path('app_tarea_nueva') }}">Nueva tarea</a>
+
     <ul>
         {% for tarea in tareas %}
             <li>{{ tarea.titulo }}</li>
