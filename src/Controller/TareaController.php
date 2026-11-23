@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Repository\TareaRepository;
 use App\Entity\Tarea;
 use App\Form\TareaType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\TareaManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,15 +24,14 @@ class TareaController extends AbstractController
     }
 
     #[Route('/tareas/nueva', name: 'app_tarea_nueva', methods: ['GET', 'POST'])]
-    public function nueva(Request $request, EntityManagerInterface $entityManager): Response
+    public function nueva(Request $request, TareaManager $tareaManager): Response
     {
         $tarea = new Tarea();
         $form = $this->createForm(TareaType::class, $tarea);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($tarea);
-            $entityManager->flush();
+            $tareaManager->guardar($tarea);
 
             return $this->redirectToRoute('app_tarea_index');
         }
@@ -51,13 +50,13 @@ class TareaController extends AbstractController
     }
 
     #[Route('/tareas/{id}/editar', name: 'app_tarea_editar', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function editar(Request $request, Tarea $tarea, EntityManagerInterface $entityManager): Response
+    public function editar(Request $request, Tarea $tarea, TareaManager $tareaManager): Response
     {
         $form = $this->createForm(TareaType::class, $tarea);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $tareaManager->guardar($tarea);
 
             return $this->redirectToRoute('app_tarea_ver', ['id' => $tarea->getId()]);
         }
