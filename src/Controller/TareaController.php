@@ -33,6 +33,7 @@ class TareaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $tareaManager->guardar($tarea);
 
+            $this->addFlash('success', 'Tarea creada.');
             return $this->redirectToRoute('app_tarea_index');
         }
 
@@ -58,6 +59,7 @@ class TareaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $tareaManager->guardar($tarea);
 
+            $this->addFlash('success', 'Tarea actualizada.');
             return $this->redirectToRoute('app_tarea_ver', ['id' => $tarea->getId()]);
         }
 

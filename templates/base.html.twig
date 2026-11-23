@@ -18,6 +18,9 @@
         {% endif %}
     </head>
     <body>
+        {% for mensaje in app.flashes('success') %}
+            <div>{{ mensaje }}</div>
+        {% endfor %}
         {% block body %}{% endblock %}
         <footer>Mi primer proyecto Symfony</footer>
     </body>
