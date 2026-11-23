@@ -66,4 +66,14 @@ class TareaController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/tareas/{id}/eliminar', name: 'app_tarea_eliminar', methods: ['POST'], requirements: ['id' => '\d+'])]
+    public function eliminar(Request $request, Tarea $tarea, TareaManager $tareaManager): Response
+    {
+        if ($this->isCsrfTokenValid('eliminar'.$tarea->getId(), $request->request->getString('_token'))) {
+            $tareaManager->eliminar($tarea);
+        }
+
+        return $this->redirectToRoute('app_tarea_index');
+    }
 }
