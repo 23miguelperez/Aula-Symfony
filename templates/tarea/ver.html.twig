@@ -5,23 +5,24 @@
 {% block body %}
     <h1>{{ tarea.titulo }}</h1>
 
-    {% if tarea.completada %}
-        <p>{{ tarea.completada }}</p>
+    {% if tarea.descripcion %}
+        <p>{{ tarea.descripcion }}</p>
     {% else %}
         <p>No hay descripción disponible.</p>
     {% endif %}
 
-    {% if not tarea.completada %}
+    {% if is_granted('ROLE_USER') and not tarea.completada %}
         <form method="post"
-            action="{{ path('app_tarea_eliminar', {id: tarea.id}) }}"
-            onsubmit="return confirm('¿Seguro que quieres eliminarla?')">
+                action="{{ path('app_tarea_eliminar', {id: tarea.id}) }}"
+                onsubmit="return confirm('¿Seguro que quieres eliminarla?')">
             <input type="hidden" name="_token" value="{{ csrf_token('eliminar' ~ tarea.id) }}">
             <button type="submit">Eliminar</button>
         </form>
     {% endif %}
 
-    <a href="{{ path('app_tarea_editar', {id: tarea.id}) }}">Editar</a>
+    {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('app_tarea_editar', {id: tarea.id}) }}">Editar</a>
+    {% endif %}
+
     <a href="{{ path('app_tarea_index') }}">Volver a la lista de tareas</a>
-
-
 {% endblock %}

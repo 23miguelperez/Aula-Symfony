@@ -6,6 +6,7 @@ use App\Repository\TareaRepository;
 use App\Entity\Tarea;
 use App\Form\TareaType;
 use App\Service\TareaManager;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,7 @@ class TareaController extends AbstractController
     }
 
     #[Route('/tareas/nueva', name: 'app_tarea_nueva', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function nueva(Request $request, TareaManager $tareaManager): Response
     {
         $tarea = new Tarea();
@@ -50,7 +52,9 @@ class TareaController extends AbstractController
         ]);
     }
 
+    
     #[Route('/tareas/{id}/editar', name: 'app_tarea_editar', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
     public function editar(Request $request, Tarea $tarea, TareaManager $tareaManager): Response
     {
         $form = $this->createForm(TareaType::class, $tarea);
@@ -70,6 +74,7 @@ class TareaController extends AbstractController
     }
 
     #[Route('/tareas/{id}/eliminar', name: 'app_tarea_eliminar', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
     public function eliminar(Request $request, Tarea $tarea, TareaManager $tareaManager): Response
     {
         if ($this->isCsrfTokenValid('eliminar'.$tarea->getId(), $request->request->getString('_token'))) {

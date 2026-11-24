@@ -5,11 +5,13 @@
 {% block body %}
     <h1>Tareas</h1>
 
-    <a href="{{ path('app_tarea_nueva') }}">Nueva tarea</a>
+    {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('app_tarea_nueva') }}">Nueva tarea</a>
+    {% endif %}
 
     <ul>
         {% for tarea in tareas %}
-            <li><a href="{{ path('app_tarea_editar', {'id': tarea.id}) }}">{{ tarea.titulo }}</a></li>
+            <li><a href="{{ path('app_tarea_ver', {'id': tarea.id}) }}">{{ tarea.titulo }}</a></li>
         {% else %}
             <li>No hay tareas disponibles.</li>
         {% endfor %}
