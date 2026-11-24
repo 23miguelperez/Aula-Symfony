@@ -1,0 +1,125 @@
+:root {
+    --color-acento: #6366f1;
+    --color-acento-hover: #818cf8;
+    --color-acento-texto: #a5b4fc;
+    --color-fondo: #0f1117;
+    --color-superficie: #181b23;
+    --color-superficie-hover: #1f232d;
+    --color-texto: #e5e7eb;
+    --color-texto-suave: #9ca3af;
+    --color-borde: #2a2f3a;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+a {
+    color: var(--color-acento-texto);
+}
+
+/* Barra superior */
+.barra {
+    background-color: var(--color-superficie);
+    border-bottom: 1px solid var(--color-borde);
+}
+.barra .navbar-brand {
+    font-weight: 600;
+    color: var(--color-texto);
+}
+.barra .nav-link {
+    color: var(--color-texto-suave);
+    font-weight: 500;
+}
+.barra .nav-link:hover {
+    color: var(--color-acento-texto);
+}
+.barra .navbar-text {
+    color: var(--color-texto-suave);
+    font-size: 0.9rem;
+}
+
+/* Botones */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+.btn-primary,
+.btn-success {
+    --bs-btn-bg: var(--color-acento);
+    --bs-btn-border-color: var(--color-acento);
+    --bs-btn-color: #fff;
+    --bs-btn-hover-bg: var(--color-acento-hover);
+    --bs-btn-hover-border-color: var(--color-acento-hover);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-active-bg: var(--color-acento-hover);
+    --bs-btn-active-border-color: var(--color-acento-hover);
+}
+.btn-outline-secondary {
+    --bs-btn-color: var(--color-texto);
+    --bs-btn-border-color: var(--color-borde);
+    --bs-btn-hover-bg: var(--color-superficie-hover);
+    --bs-btn-hover-color: var(--color-texto);
+    --bs-btn-hover-border-color: #3a4150;
+}
+
+/* Lista de tareas */
+.list-group {
+    border: 1px solid var(--color-borde);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+.list-group-item {
+    --bs-list-group-bg: var(--color-superficie);
+    --bs-list-group-border-color: var(--color-borde);
+    --bs-list-group-color: var(--color-texto);
+    padding: 0.9rem 1.25rem;
+}
+.list-group-item:hover {
+    background-color: var(--color-superficie-hover);
+}
+.list-group-item a {
+    color: var(--color-texto);
+    font-weight: 500;
+    text-decoration: none;
+}
+.list-group-item a:hover {
+    color: var(--color-acento-texto);
+}
+
+/* Mensajes y formularios */
+.alert {
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+}
+.form-label {
+    font-weight: 500;
+}
+.form-control {
+    background-color: var(--color-superficie);
+    border-color: var(--color-borde);
+    color: var(--color-texto);
+    border-radius: 0.5rem;
+}
+.form-control:focus {
+    background-color: var(--color-superficie);
+    color: var(--color-texto);
+    border-color: var(--color-acento);
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+}
+
+footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-texto-suave) !important;
+    border-color: var(--color-borde) !important;
+}
