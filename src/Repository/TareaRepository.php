@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Tarea;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,41 +20,24 @@ class TareaRepository extends ServiceEntityRepository
     /**
      * @return Tarea[]
      */
-    public function findRecientes(): array
+    public function findRecientes(User $propietario): array
     {
-        return $this->findBy([], ['id' => 'DESC']);
+        return $this->findBy(['propietario' => $propietario], ['id' => 'DESC']);
     }
 
     /**
      * @return Tarea[]
      */
-    public function findPendientes(): array
+    public function findPendientes(User $propietario): array
     {
-        return $this->findBy(['completada' => false], ['id' => 'DESC']);
+        return $this->findBy(['propietario' => $propietario, 'completada' => false], ['id' => 'DESC']);
     }
 
-//    /**
-//     * @return Tarea[] Returns an array of Tarea objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Tarea
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @return Tarea[]
+     */
+    public function findCompletadas(User $propietario): array
+    {
+        return $this->findBy(['propietario' => $propietario, 'completada' => true], ['id' => 'DESC']);
+    }
 }

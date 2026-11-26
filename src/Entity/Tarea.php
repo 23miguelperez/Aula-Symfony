@@ -30,6 +30,10 @@ class Tarea
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $fechaLimite = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $propietario = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -79,6 +83,18 @@ class Tarea
     public function setFechaLimite(?\DateTimeImmutable $fechaLimite): static
     {
         $this->fechaLimite = $fechaLimite;
+
+        return $this;
+    }
+
+    public function getPropietario(): ?User
+    {
+        return $this->propietario;
+    }
+
+    public function setPropietario(?User $propietario): static
+    {
+        $this->propietario = $propietario;
 
         return $this;
     }
