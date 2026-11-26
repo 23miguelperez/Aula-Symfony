@@ -1,8 +1,30 @@
+{% extends 'base.html.twig' %}
+
 {% block title %}Inicio{% endblock %}
 
 {% block body %}
-    <h1>{{ titulo }}</h1>
-    <p>Esta es la página principal de nuestro sitio web.</p>
-    <a href="{{ path('app_saludo', {nombre: 'Miki'}) }}">Saludar</a>
-    <a href="{{ path('app_tarea_index') }}">Ver tareas</a>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-body p-5 text-center">
+                    <h1 class="display-6 mb-3">{{ titulo }}</h1>
+                    <p class="lead text-secondary mb-4">
+                        Organiza tus tareas en un solo sitio. Cada usuario ve y gestiona solo las suyas.
+                    </p>
+
+                    {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path('app_tarea_index') }}" class="btn btn-primary btn-lg">Ir a mis tareas</a>
+                        <a href="{{ path('app_tarea_nueva') }}" class="btn btn-outline-secondary btn-lg">Nueva tarea</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg">Iniciar sesión</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-outline-secondary btn-lg">Crear cuenta</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <p class="text-center small mt-3 mb-0">
+                <a href="{{ path('app_saludo', {nombre: 'Miki'}) }}">Probar la ruta de saludo</a>
+            </p>
+        </div>
+    </div>
 {% endblock %}
